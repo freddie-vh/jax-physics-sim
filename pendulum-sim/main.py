@@ -16,7 +16,7 @@ def main():
 
     tests.rmse_test(tested_params=tested_params, wb_params=wb_params)
     tests.graph(tested_params=tested_params, wb_params=wb_params)
-    
+    tests.energy_conservation_test(tested_params=tested_params)
     return 0
 
 main()

@@ -23,5 +23,18 @@ def rmse_test(tested_params, wb_params):
     result = simulator.simulate_with_nn(*tested_params, wb_params)
     rmse = jnp.sqrt(jnp.mean((result - true_data)**2))
     sim_rmse = jnp.sqrt(jnp.mean((sim_data - true_data)**2))
-    print("RMSE with network:", rmse, "RMSE without network:", sim_rmse, "Improvement:", (sim_rmse-rmse))
+    print("RMSE with network:", rmse)
+    print("RMSE without network:", sim_rmse)
+    print("Improvement", (sim_rmse-rmse))
     return rmse
+
+def energy_conservation_test(tested_params):
+    sim_data = simulator.simulate(*tested_params, False)
+    timestep = tested_params[4]
+    theta = sim_data[:, 0]
+    omega = sim_data[:, 1]
+    modified_energy = 0.5 * ((omega[0] ** 2) * (theta ** 2) + (omega ** 2) - (omega[0] ** 2) * timestep * theta * omega) #modified energy equation, cross term to remove energy oscillation from integrator
+    mean_modified_energy = jnp.mean(modified_energy)
+    std = jnp.std(modified_energy)
+    print("Mean modified energy:", mean_modified_energy)
+    print("Standard deviation of modified energy:", std)
