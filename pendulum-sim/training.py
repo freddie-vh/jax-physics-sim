@@ -4,10 +4,9 @@ import network
 from jax import random
 import jax.numpy as jnp
 
-def train(training_params, network_params, steps):
+def train(training_params, network_params, steps): # Takes true data and applies one step of integrator, network then trained on difference between that and the true next state
     key = random.PRNGKey(2)
     params = network.init_params(network_params, key)
-
     xs, targets = [], []
     for training_cond in training_params:
         traj_data = simulator.simulate(*training_cond, steps, True)
@@ -19,7 +18,7 @@ def train(training_params, network_params, steps):
         new_theta = theta0 + dt * new_omega
         new_state = jnp.stack([new_theta, new_omega], axis=1)
         xs.append(new_state)
-        targets.append((traj_data[1:] - new_state) / dt)
+        targets.append((traj_data[1:] - new_state) / dt) # Dividing by dt means error is treated as a rate so network learns a term that doesn't depend on the step size it was trained on
     return network.optimise(jnp.concatenate(xs), jnp.concatenate(targets), params)
 
 def generate(data_points_num, n=100): # Generates random training data using a uniform distribution, shuffles the data and returns required number of datapoints

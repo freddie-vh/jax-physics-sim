@@ -3,7 +3,7 @@ import simulator
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 
-def graph(tested_params, wb_params):
+def graph(tested_params, wb_params): # Plots angle against angular velocity
     sim_data = simulator.simulate(*tested_params, False)
     true_data = simulator.simulate(*tested_params, True)
     result = simulator.simulate_with_nn(*tested_params, wb_params)

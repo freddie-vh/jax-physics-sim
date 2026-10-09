@@ -13,7 +13,7 @@ def test_energy_conservation(tested_params):
     deviation = jnp.max(jnp.abs(modified_energy - modified_energy[0])) / jnp.abs(modified_energy[0])
     assert deviation < 2e-2, f"max relative deviation {deviation}"
 
-def test_symmetry(tested_params):
+def test_symmetry(tested_params): # Checks simulator gives same result for symmetric starting conditions
     theta0, omega0, *rest = tested_params
     sim_data = simulator.simulate(*tested_params, False)
     sim_data_mirrored = simulator.simulate(-theta0, -omega0, *rest, False)
