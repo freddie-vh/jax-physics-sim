@@ -24,8 +24,8 @@ def train(training_params, network_params, steps): # Takes true data and applies
 def generate(data_points_num, n=100): # Generates random training data using a uniform distribution, shuffles the data and returns required number of datapoints
     key = random.PRNGKey(1)
     key1, key2, key3 = random.split(key, 3)
-    theta0 = jnp.linspace(-0.5, 0.5, n)
-    omega0 = random.uniform(key1, n, minval=-0.5, maxval=0.5)
+    theta0 = jnp.linspace(-1.57, 1.57, n)
+    omega0 = random.uniform(key1, n, minval=-1.0, maxval=1.0)
     g = jnp.full(n, 9.81)
     L = random.uniform(key2, n, minval=0.5, maxval=1.5)
     dt = jnp.full(n, 0.01)

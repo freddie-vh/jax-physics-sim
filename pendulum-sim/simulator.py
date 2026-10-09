@@ -11,7 +11,7 @@ def simulate(theta0, omega0, g, L, dt, steps, unknown):
         angular_acceleration = -(g/L) * jnp.sin(theta)
         new_omega = omega + dt * angular_acceleration # Velocity updated first to stop energy from drifting over time
         if unknown == True:
-            new_omega -= 0.01 * omega
+            new_omega -= 0.01 * jnp.sign(omega) * omega ** 2
         new_theta = theta + dt * new_omega
         new_state = jnp.array([new_theta, new_omega])
         return new_state, new_state
