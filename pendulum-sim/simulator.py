@@ -2,7 +2,6 @@ import network
 
 import jax.numpy as jnp
 import jax.lax as lax
-from jax import random
 import jax
 
 @jax.jit(static_argnames=("steps", "unknown"))

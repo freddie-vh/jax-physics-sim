@@ -1,6 +1,4 @@
-import training
 import simulator
-import network
 
 import jax.numpy as jnp
 import matplotlib.pyplot as plt

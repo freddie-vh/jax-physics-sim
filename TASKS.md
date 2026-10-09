@@ -5,8 +5,8 @@
 - Create a set of tests to validate results:
   - Simulator tests (without NN):
     - Check simulator matches SHM for small angles [ ]
-    - Check total energy is approximately constant [ ]
-    - Check simulator gives the same result for symmetrical starting angles [ ]
+    - Check total energy is approximately constant [x]
+    - Check simulator gives the same result for symmetrical starting angles [x]
   - Network tests:
     - RMSE of results when tested on conditions not in the training dataset [x]
     - Graph results with neural net vs without vs true data [x]
